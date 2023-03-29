@@ -1,0 +1,47 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 30, 'days'
+    resolutionStrategy.cacheChangingModulesFor 30, 'days'
+    resolutionStrategy.cacheDynamicVersionsFor 30, 'days'
+}
+
+buildscript {
+    repositories {
+        maven {url 'https://maven.aliyun.com/repository/public/'}
+        maven {url 'https://maven.aliyun.com/repository/google/'}
+        maven {url 'https://maven.aliyun.com/repository/central/'}
+        maven {url 'https://maven.aliyun.com/repository/gradle-plugin/'}
+        maven { url 'https://developer.huawei.com/repo/' }
+        mavenLocal()
+         mavenCentral()
+         google()
+         jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.google.gms:google-services:4.3.3'
+        classpath 'com.huawei.agconnect:agcp:1.6.0.300'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+apply from: "variables.gradle"
+allprojects {
+    repositories {
+        maven {url 'https://maven.aliyun.com/repository/public/'}
+        maven {url 'https://maven.aliyun.com/repository/google/'}
+        maven {url 'https://maven.aliyun.com/repository/central/'}
+        maven {url 'https://maven.aliyun.com/repository/gradle-plugin/'}
+        maven { url 'https://developer.huawei.com/repo/' }
+        mavenLocal()
+         mavenCentral()
+         google()
+         jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

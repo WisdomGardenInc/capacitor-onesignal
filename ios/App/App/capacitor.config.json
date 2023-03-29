@@ -1,0 +1,20 @@
+{
+  "appId": "com.wisdomgarden.trv2",
+  "appName": "CapacitorOnesignal",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "backgroundColor": "#00BBBD",
+  "iosScheme": "http",
+  "androidScheme": "http",
+  "cordova": {},
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false,
+      "androidSplashResourceName": "single",
+      "backgroundColor": "#00BBBD",
+      "androidScaleType": "CENTER"
+    }
+  }
+  
+}

@@ -1,0 +1,31 @@
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+def getCurrentFlavor() {
+    Gradle gradle = getGradle();
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString();
+
+    Pattern pattern;
+
+    if (tskReqStr.contains("assemble"))
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)");
+    else
+        pattern = Pattern.compile("bundle(\\w+)(Release|Debug)");
+
+    Matcher matcher = pattern.matcher(tskReqStr);
+
+    if (matcher.find()) {
+        return matcher.group(1).toLowerCase();
+    } else {
+        return "common"
+    }
+}
+
+String currentFlavor = getCurrentFlavor();
+println("currentFlavor: " + currentFlavor);
+
+include ':app'
+include ':capacitor-cordova-android-plugins'
+project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')
+
+apply from: 'capacitor.settings.gradle'
