@@ -4,7 +4,7 @@ import { JSONType } from "@/types/common";
 export type PromiseStringsFunction<T> = (arg1: string[]) => Promise<T>;
 let logger: { push: (m: string) => void } | undefined;
 
-const loopInChunks = async (list: string[], proxy: PromiseStringsFunction<boolean>, chunk = 90) => {
+const loopInChunks = async (list: string[], proxy: PromiseStringsFunction<boolean>, chunk = 100) => {
   try {
     for (let i = 0; i < list.length; i += chunk) {
       const chunks = list.slice(i, i + chunk);
@@ -32,8 +32,6 @@ class OneSignalProxyTunnel {
       }
 
       const subscribedTags = await this.getTags();
-
-      logger?.push(`OneSignal existed tags length: ${Object.keys(subscribedTags).length}`);
       const toSubscribeTags = tags;
 
       const toDeleteTags = Object.keys(subscribedTags).reduce((results: Array<string>, tag: string) => {
@@ -87,7 +85,6 @@ class OneSignalProxyTunnel {
   }
 
   private logSetting() {
-    logger?.push("now using " + this.TUNNEL);
     OneSignalProxy.setLogLevel(6, 0);
   }
 

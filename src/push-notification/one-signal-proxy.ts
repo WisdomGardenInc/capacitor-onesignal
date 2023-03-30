@@ -3,10 +3,10 @@
 // some onesignal api no callback, mock it
 let logger: { push: (m: string) => void } | undefined;
 
-const mockExecuteCallback = (execute: Function) => {
+const mockExecuteCallback = (execute: Function, timeout = 500) => {
   return new Promise<boolean>((resolve) => {
     execute();
-    setTimeout(() => resolve(true), 500);
+    setTimeout(() => resolve(true), timeout);
   });
 };
 
@@ -63,8 +63,6 @@ const OneSignalProxy = {
   },
 
   getTags() {
-    logger?.push("onesignal getTags");
-    debugger
     return new Promise<{ [key: string]: string }>((resolve) => {
       return window.cordova.exec(
         (tags) => {

@@ -13,7 +13,7 @@
       </div>
     </div>
     <div :class="[$style.area, $style.console]">
-      <span>Console:</span>
+      <div><span>Console:</span> <button @click="clear">Clear</button></div>
       <textarea ref="consoleOut" readonly disabled :value="logsText"></textarea>
     </div>
   </div>
@@ -63,6 +63,10 @@ const reload = () => {
 
 const logsText = computed(() => logs.value.join("\n"));
 
+const clear = () => {
+  logs.value = [];
+};
+
 onMounted(() => {
   Plugins.SplashScreen.hide();
 });
@@ -70,7 +74,6 @@ onMounted(() => {
 watch(
   () => logs.value,
   () => {
-    console.log("111");
     consoleOut.value?.scrollTo(0, (consoleOut.value?.scrollHeight || 0) + 40);
   },
   { deep: true }
